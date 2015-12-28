@@ -732,22 +732,76 @@ Software Defined Networking
 
 
 \section{SDN}
-In current networking architectures, both control plane and data plane are generally bundled together in network switches. When a new device is added to the network or a policy is changed, operator needs to configure each device individually. Also, there exist a lot of middle-boxes, such as firewalls or packet inspectors, which also enforce control policies to the network. These also require individual administration and configuration. This situation makes management of large networks very hard, error prone, difficult to troubleshoot. As stated before, SDN argues, control plane needs better abstractions. What are these abstractions? First control plane needs to discover the network topology to achieve its goals. Then, it needs to find out how it can enforce its goal (firewall isolation, trafficking, routing) on that topology. Finally, it needs to describe switches and routers how to forward. To be able to achieve these goals, SDN provides two abstractions: network discovery and network switch configuration.
+In current networking architectures, both control plane and data plane are generally 
+bundled together in network switches. When a new device is added to the network 
+or a policy is changed, operator needs to configure each device individually. 
+Also, there exist a lot of middle-boxes, such as firewalls or packet inspectors, 
+which also enforce control policies to the network. These also require individual 
+administration and configuration. This situation makes management of large 
+networks very hard, error prone, difficult to troubleshoot. As stated before, 
+SDN argues, control plane needs better abstractions. What are these 
+abstractions? First control plane needs to discover the network topology 
+to achieve its goals. Then, it needs to find out how it can enforce its 
+goal (firewall isolation, trafficking, routing) on that topology. 
+Finally, it needs to describe switches and routers how to forward. To 
+be able to achieve these goals, SDN provides two abstractions: 
+network discovery and network switch configuration.
 
-Network discovery is done by network operating system. It runs on commodity hardware servers within the network and communicates with switches through a forwarding model. It is aware of the network topology through a virtualized network abstraction (network virtualization). NOS configures network switches for forwarding through southbound APIs (One of the API providers is OpenFlow and it will be described in the next section). Operator programs the network using a control program. Simply, operator writes her function and control program executes the function against the network topology, using network operating system’s APIs. The abstraction provided here is that control program does not concern itself with the whereabouts of the network topology. It is provided by the operating system. On the other side, OS does not concern itself with the goal of the operator. It provides the network topology and conveys the control program’s forwarding information down to the switches. This clean separation of concerns allows innovation in different layers keeping them intact. 
+Network discovery is done by network operating system. It runs on commodity 
+hardware servers within the network and communicates with switches through 
+a forwarding model. It is aware of the network topology through a 
+virtualized network abstraction (network virtualization). NOS 
+configures network switches for forwarding through southbound APIs 
+(One of the API providers is OpenFlow and it will be described 
+in the next section). Operator programs the network using a control 
+program. Simply, operator writes her function and control 
+program executes the function against the network topology, using 
+network operating system’s APIs. The abstraction provided here is 
+that control program does not concern itself with the whereabouts of 
+the network topology. It is provided by the operating system. 
+On the other side, OS does not concern itself with the goal of 
+the operator. It provides the network topology and conveys the control 
+program’s forwarding information down to the switches. 
+This clean separation of concerns allows innovation in different 
+layers keeping them intact. 
 
 
 
 \section{Main Components of an SDN~Architecture}
 
 \subsubsection{Infrastructure}
-Network infrastructure is typically composed of switches, routers, and various middle-boxes. Generally all these devices are more intelligent than they need to be. They decide what packet to forward and what not to, meaning that assuming the role of control plane elements. In an SDN network architecture, as mentioned before, simple data forwarding operation and deciding what to forward are seperated. In other words, intelligence is removed from data plane and given to a centralized control system, generally called, network operating system (hereafter, NOS). As a consequence, what is left for infrastructure elements are simple packet forwarding job. Yet, control programs need to be able to program those devices, and this is typically done by using a common protocol for (e.g. OpenFlow), providing programmability of different devices, along with interoperability of such devices in a heterogeneous networking environment.
+Network infrastructure is typically composed of switches, routers, and various middle-boxes.
+Generally all these devices are more intelligent than they need to be. They decide what
+packet to forward and what not to, meaning that assuming the role of control plane elements.
+In an SDN network architecture, as mentioned before, simple data forwarding operation and 
+deciding what to forward are seperated. In other words, intelligence is removed from data 
+plane and given to a centralized control system, generally called, network operating system 
+(hereafter, NOS). As a consequence, what is left for infrastructure elements are simple 
+packet forwarding job. Yet, control programs need to be able to program those devices, 
+and this is typically done by using a common protocol for (e.g. OpenFlow), providing programmability 
+of different devices, along with interoperability of such devices in a heterogeneous networking environment.
 
-OpenFlow, the open protocol for programming switches and routers exploits common denominator of device interfaces exposed. It provides set of methods for programming flow-table of devices. An OpenFlow switch has three pieces: flow table, secure channel, and OpenFlow protocol. Flow table keeps the flow entries, which holds the actions for telling a device how to process the flow. Secure channel is the communication path between the device and the control program, through which commands and packets are transferred. Lastly, OpenFlow protocol supplies the means of communication between the control program and the device.
+OpenFlow, the open protocol for programming switches and routers exploits common 
+denominator of device interfaces exposed. It provides set of methods for programming 
+flow-table of devices. An OpenFlow switch has three pieces: flow table, secure channel, 
+and OpenFlow protocol. Flow table keeps the flow entries, which holds the actions 
+for telling a device how to process the flow. Secure channel is the communication 
+path between the device and the control program, through which commands and packets are 
+transferred. Lastly, OpenFlow protocol supplies the means of communication between 
+the control program and the device.
 
-Definition of flow is generally dependent on the context. In one network environment it can be defined as all packets from a specific IP or MAC address, yet in another context it can be defined as all packets originating from the same port of a router. In more general sense, it can be defined as a group of packets meeting a certain criteria.
+Definition of flow is generally dependent on the context. In one network environment it 
+can be defined as all packets from a specific IP or MAC address, yet in another 
+context it can be defined as all packets originating from the same port of a router. 
+In more general sense, it can be defined as a group of packets meeting a certain criteria.
 
-Flow table entries have three fields: definition header, action, and statistics. Fields of a definition header can be seen in table one. Actions defines the way to process matching packets. Basic examples for actions are "forward matching packets to specific ports", "make controller program receive this flow's packets", and "drop packets belonging to a flow". Basic accounting of flows are also kept. These stats include the number of packets matching each flow and the timestamp of the last matched packet to a flow.
+Flow table entries have three fields: definition header, action, and statistics. 
+Fields of a definition header can be seen in table one. Actions defines the way to 
+process matching packets. Basic examples for actions are "forward matching packets to 
+specific ports", "make controller program receive this flow's packets", and 
+"drop packets belonging to a flow". Basic accounting of flows are also kept. 
+These stats include the number of packets matching each flow and the timestamp of 
+the last matched packet to a flow.
 
 \begin{table}[]
 \centering
