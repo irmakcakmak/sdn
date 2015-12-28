@@ -778,12 +778,20 @@ deciding what to forward are seperated. In other words, intelligence is removed 
 plane and given to a centralized control system, generally called, network operating system 
 (hereafter, NOS). As a consequence, what is left for infrastructure elements are simple 
 packet forwarding job. Yet, control programs need to be able to program those devices, 
-and this is typically done by using a common protocol for (e.g. OpenFlow), providing programmability 
-of different devices, along with interoperability of such devices in a heterogeneous networking environment.
+and this is typically done by using a common protocol (e.g. OpenFlow), providing 
+programmability of different devices, along with interoperability of such devices 
+in a heterogeneous networking environment.
 
-OpenFlow, the open protocol for programming switches and routers exploits common 
-denominator of device interfaces exposed. It provides set of methods for programming 
-flow-table of devices. An OpenFlow switch has three pieces: flow table, secure channel, 
+Programming APIs, mediating communication between forwarding and control elements
+are called Southbound interfaces.
+Simply, it sits between the NOS and hardware in the architecture. Topology changes,
+ flow statistics, and alien packets seen first time by switches are provided to 
+NOS by southbound interfaces.
+
+OpenFlow is such a protocol  for programming
+ switches and routers exploiting common denominator of device interfaces exposed.
+It provides set of methods for programming flow-table of devices.
+An OpenFlow switch has three pieces: flow table, secure channel, 
 and OpenFlow protocol. Flow table keeps the flow entries, which holds the actions 
 for telling a device how to process the flow. Secure channel is the communication 
 path between the device and the control program, through which commands and packets are 
@@ -799,7 +807,7 @@ Flow table entries have three fields: definition header, action, and statistics.
 Fields of a definition header can be seen in table one. Actions defines the way to 
 process matching packets. Basic examples for actions are "forward matching packets to 
 specific ports", "make controller program receive this flow's packets", and 
-"drop packets belonging to a flow". Basic accounting of flows are also kept. 
+"drop packets belonging to a flow". Statistics fields keeps basic accounting of flows. 
 These stats include the number of packets matching each flow and the timestamp of 
 the last matched packet to a flow.
 
