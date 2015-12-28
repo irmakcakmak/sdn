@@ -2,42 +2,7 @@
 
 \usepackage{multirow}
 \usepackage{graphicx}
-% *** CITATION PACKAGES ***
-%
-\ifCLASSOPTIONcompsoc
-  % The IEEE Computer Society needs nocompress option
-  % requires cite.sty v4.0 or later (November 2003)
-  \usepackage[nocompress]{cite}
-\else
-  % normal IEEE
-  \usepackage{cite}
-\fi
-% cite.sty was written by Donald Arseneau
-% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
-% \cite{} output to follow that of the IEEE. Loading the cite package will
-% result in citation numbers being automatically sorted and properly
-% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
-% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
-% \cite will automatically add leading space, if needed. Use cite.sty's
-% noadjust option (cite.sty V3.8 and later) if you want to turn this off
-% such as if a citation ever needs to be enclosed in parenthesis.
-% cite.sty is already installed on most LaTeX systems. Be sure and use
-% version 5.0 (2009-03-20) and later if using hyperref.sty.
-% The latest version can be obtained at:
-% http://www.ctan.org/pkg/cite
-% The documentation is contained in the cite.sty file itself.
-%
-% Note that some packages require special options to format as the Computer
-% Society requires. In particular, Computer Society  papers do not use
-% compressed citation ranges as is done in typical IEEE papers
-% (e.g., [1]-[4]). Instead, they list every citation separately in order
-% (e.g., [1], [2], [3], [4]). To get the latter we need to load the cite
-% package with the nocompress option which is supported by cite.sty v4.0
-% and later.
-
-
-
-
+\usepackage{cite}
 
 \ifCLASSINFOpdf
 \else
@@ -220,7 +185,7 @@ cntroller instances, applying data consistency algorithms, and controller node
 monitoring.
 
 \subsubsection{Applications}
- Network applications are the actual entites managing the network. Proposed 
+ Network \cite{norman} applications are the actual entites managing the network. Proposed 
 layering up until now is solely aimed at providing right abstractions for 
 applications. Forwarding behaviour of the network is programmed in application 
 level against the virtual network topology provided by network operating system,
@@ -236,7 +201,7 @@ enforcing security policies, routing, network virtualization, load balancing,
 One of the most promising novelites provided by this capability in 
 networking is SDN app stores. HP hosts an app store similar to Apple or
  Google's stores for mobile devices. Store provides apps for OpenFlow
- based HP devices.
+ based HP devices \cite{hede}.
 \section{Conclusion}
 There is a tremendous research effort ongoing in the field of SDN. Research
  and development is focused on improving switch design for performance, 
@@ -266,9 +231,13 @@ The author would like to thank Prof.Dr. Fatih Alagoz for supporting this learnin
 
 \begin{thebibliography}{1}
 
-\bibitem{IEEEhowto:kopka}
+\bibitem{hede}
 H.~Kopka and P.~W. Daly, \emph{A Guide to {\LaTeX}}, 3rd~ed.\hskip 1em plus
   0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+\bibitem{norman} E. H. Norman {\em Japan's emergence as a modern
+  state} 1940: International Secretariat, Institute of Pacific
+  Relations.
 
 \end{thebibliography}
 
