@@ -824,8 +824,62 @@ the last matched packet to a flow.
 
 
 \subsubsection{Network Operating System}
-\subsubsection{Applications}
+Network operating systems exist for quite some time, but they all have been specific
+ to certain vendors and closed source. Also they have been more like a collection 
+of instructions (Juniper JunOS, Cisco IOS).
 
+On the other hand, NOSs in SDN nomenclature, have wider responsibilities and capabilities.
+ They sit between the southbound interface and network control applications.
+ Their goals are similar to traditional OS, but in a networking 
+level. NOSs provide two basic novelties: first, applications on top of NOS can 
+be programmed using a centralized programming model, viewing the whole network as 
+a single machine; second, they can be programmed using higher level
+abstractions (host names, user names) instead of low-level primitives (MAC address).
+ A network programmer does not need to know how to interface with any forwarding 
+device.
+
+NOS views network in switch level along with middle-boxes, users, offered services.
+ It only lacks current state of network traffic. NOS gathers this view using 
+the aforementioned flows provided through southbound interfaces. In detail, when a
+ flow in a switch does not match any entry in the table, it is forwarded 
+to the control program (NOS). Alternatively, flow-table might have been programmed 
+to forward packets belonging to particular protocols, such as DNS, to NOS. Using 
+these flows NOS gathers the network view and decides to forward the traffic or not
+ and calculates the route.
+
+ NOX, Floodlight, Maestro, Beacon, ProgrammableFlow, Ryu NOS, Rosemary are some 
+examples of such control progragrams, addressing different needs and having 
+different purposes. All are considered as network operating systems.
+
+Programming APIs provided by a NOS are generally called "Northbound interface"s.
+ Their goal are similar to what POSIX tries to achieve for UNIX, providing a 
+standard way of programming to OS programmers. These APIs are RESTful in some 
+instances. On some others, they are provided as programming languages or file 
+systems.
+
+Also network operating systems which have distributed nature, expose east and 
+westbound interfaces providing functions for data communication among 
+cntroller instances, applying data consistency algorithms, and controller node 
+monitoring.
+
+\subsubsection{Applications}
+ Network applications are the actual entites managing the network. Proposed 
+layering up until now is solely aimed at providing right abstractions for 
+applications. Forwarding behaviour of the network is programmed in application 
+level against the virtual network topology provided by network operating system,
+ network virtualization, and higher level programming languages. Defined behaviour 
+is installed to switches by NOS through southbound API.
+
+Network applications are developed and deployed for executing 
+certain network functions such as, 
+enforcing security policies, routing, network virtualization, load balancing,
+ power saving, providing reliability, measurement and monitoring,
+ traffic engineering and optimization, etc.
+
+One of the most promising novelites provided by this capability in 
+networking is SDN app stores. HP hosts an app store similar to Apple or
+ Google's stores for mobile devices. Store provides apps for OpenFlow
+ based HP devices.
 \section{Conclusion}
 
 
