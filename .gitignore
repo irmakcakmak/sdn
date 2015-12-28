@@ -1,0 +1,8 @@
+.DS_Store
+*.swp
+.bash_history
+.cache/
+*.aux
+*.dvi
+*.log
+*.pdf
