@@ -31,7 +31,14 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-Software defined networking is a design model, set of principles, and an abstraction rather than a new technology. By defining right abstractions, this approach makes network design, implementation, operation, debugging, and troubleshooting easier. Also by providing layering, it makes innovation in network technologies easier and more cost effective. This short paper tries to describe how and whys of these claims shortly, from the perspective of the author.
+Software defined networking is a design model, set of principles, 
+and an abstraction rather than a new technology. By 
+defining right abstractions, this approach makes network design
+, implementation, operation, debugging, and troubleshooting easier. 
+Also by providing layering, it makes innovation in network 
+technologies easier and more cost effective. This short paper 
+tries to describe how and whys of these claims shortly, 
+from the perspective of the author.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -51,7 +58,31 @@ Software Defined Networking
 \label{sec:introduction}
 \fi
 
-\IEEEPARstart{C}{urrent} IP based network technologies have three abstractions: data plane, control plane, and management plane. Data plane's responsibility is described by simply forwarding of packets through switches or routers. In case of a switch forwarding, network device simply checks the header of the packet and then forwards the packet to its destination via its MAC address. Routers do the same job through IP address based forwarding. This process is simple as no state computation is done. On the contrary, control plane computes the next forwarding state, which means whether the packet will be forwarded, dropped or rerouted to another destination than its intended target. Example mechanisms for control plane are firewalls, distributed routing algorithms, ACLs, VLANs, MPLS, etc. Management plane carries administration traffic. Commands like telnet, ping, traceroute, etc. are trafficked through this plane. Generally management plane is considered within the control plane. The argument of SDN is data plane has a very well abstraction and theoretical base; yet, control plane is a bag of protocols lacking any abstraction, layering or theoretical background which hinders innovation in control plane and in general, networking. TCP/IP technology, for instance, has very good abstractions as seven layers. These layers are developed further based on the theory behind it, without affecting other layers, and without needing to rethink every aspect of the protocol. On the other side, if a researcher is designing a new algorithm for routing, she needs to start from scratch. SDN argues, providing right abstractions for control plane will make it open to innovation and development, similar to data plane. 
+\IEEEPARstart{C}{urrent} IP based network technologies have three abstractions: 
+data plane, control plane, and management plane. Data plane's responsibility 
+is described by simply forwarding of packets through switches or routers. 
+In case of a switch forwarding, network device simply checks the header 
+of the packet and then forwards the packet to its destination via its 
+MAC address. Routers do the same job through IP address based forwarding. 
+This process is simple as no state computation is done. On the 
+contrary, control plane computes the next forwarding state, which means 
+whether the packet will be forwarded, dropped or rerouted to another 
+destination than its intended target. Example mechanisms for control plane 
+are firewalls, distributed routing algorithms, ACLs, VLANs, MPLS, etc. 
+Management plane carries administration traffic. Commands like telnet, 
+ping, traceroute, etc. are trafficked through this plane. 
+Generally management plane is considered within the control plane. 
+The argument of SDN is data plane has a very well abstraction and theoretical 
+base; yet, control plane is a bag of protocols lacking 
+any abstraction, layering or theoretical background which hinders innovation 
+in control plane and in general, networking \cite{shenker1}. TCP/IP technology
+, for instance, has very good abstractions as seven layers. 
+These layers are developed further based on the theory behind it
+, without affecting other layers, and without needing to rethink every 
+aspect of the protocol. On the other side, if a researcher is designing 
+a new algorithm for routing, she needs to start from scratch. 
+SDN argues, providing right abstractions for control plane will 
+make it open to innovation and development, similar to data plane. 
 
 \section{SDN}
 In current networking architectures, both control plane and data plane are generally 
@@ -60,12 +91,12 @@ or a policy is changed, operator needs to configure each device individually.
 Also, there exist a lot of middle-boxes, such as firewalls or packet inspectors, 
 which also enforce control policies to the network. These also require individual 
 administration and configuration. This situation makes management of large 
-networks very hard, error prone, difficult to troubleshoot. As stated before, 
+networks very hard, error prone, difficult to troubleshoot \cite{keown2}. As stated before, 
 SDN argues, control plane needs better abstractions. What are these 
 abstractions? First control plane needs to discover the network topology 
 to achieve its goals. Then, it needs to find out how it can enforce its 
 goal (firewall isolation, trafficking, routing) on that topology. 
-Finally, it needs to describe switches and routers how to forward. To 
+Finally, it needs to describe switches and routers how to forward \cite{casado2}. To 
 be able to achieve these goals, SDN provides two abstractions: 
 network discovery and network switch configuration.
 
@@ -82,7 +113,7 @@ network operating system’s APIs. The abstraction provided here is
 that control program does not concern itself with the whereabouts of 
 the network topology. It is provided by the operating system. 
 On the other side, OS does not concern itself with the goal of 
-the operator. It provides the network topology and conveys the control 
+the operator \cite{gude}. It provides the network topology and conveys the control 
 program’s forwarding information down to the switches. 
 This clean separation of concerns allows innovation in different 
 layers keeping them intact. 
@@ -118,7 +149,7 @@ and OpenFlow protocol. Flow table keeps the flow entries, which holds the action
 for telling a device how to process the flow. Secure channel is the communication 
 path between the device and the control program, through which commands and packets are 
 transferred. Lastly, OpenFlow protocol supplies the means of communication between 
-the control program and the device.
+the control program and the device \cite{keown1}.
 
 Definition of flow is generally dependent on the context. In one network environment it 
 can be defined as all packets from a specific IP or MAC address, yet in another 
@@ -131,7 +162,7 @@ process matching packets. Basic examples for actions are "forward matching packe
 specific ports", "make controller program receive this flow's packets", and 
 "drop packets belonging to a flow". Statistics fields keeps basic accounting of flows. 
 These stats include the number of packets matching each flow and the timestamp of 
-the last matched packet to a flow.
+the last matched packet to a flow \cite{keown1}.
 
 \begin{table}[]
 \centering
@@ -148,7 +179,7 @@ the last matched packet to a flow.
 \subsubsection{Network Operating System}
 Network operating systems exist for quite some time, but they all have been specific
  to certain vendors and closed source. Also they have been more like a collection 
-of instructions (Juniper JunOS, Cisco IOS).
+of instructions (Juniper JunOS, Cisco IOS) \cite{kreutz}.
 
 On the other hand, NOSs in SDN nomenclature, have wider responsibilities and capabilities.
  They sit between the southbound interface and network control applications.
@@ -158,7 +189,7 @@ be programmed using a centralized programming model, viewing the whole network a
 a single machine; second, they can be programmed using higher level
 abstractions (host names, user names) instead of low-level primitives (MAC address).
  A network programmer does not need to know how to interface with any forwarding 
-device.
+device. \cite{casado1}
 
 NOS views network in switch level along with middle-boxes, users, offered services.
  It only lacks current state of network traffic. NOS gathers this view using 
@@ -167,11 +198,11 @@ the aforementioned flows provided through southbound interfaces. In detail, when
 to the control program (NOS). Alternatively, flow-table might have been programmed 
 to forward packets belonging to particular protocols, such as DNS, to NOS. Using 
 these flows NOS gathers the network view and decides to forward the traffic or not
- and calculates the route.
+ and calculates the route \cite{gude}.
 
  NOX, Floodlight, Maestro, Beacon, ProgrammableFlow, Ryu NOS, Rosemary are some 
 examples of such control progragrams, addressing different needs and having 
-different purposes. All are considered as network operating systems.
+different purposes. All are considered as network operating systems \cite{kreutz}.
 
 Programming APIs provided by a NOS are generally called "Northbound interface"s.
  Their goal are similar to what POSIX tries to achieve for UNIX, providing a 
@@ -182,10 +213,10 @@ systems.
 Also network operating systems which have distributed nature, expose east and 
 westbound interfaces providing functions for data communication among 
 cntroller instances, applying data consistency algorithms, and controller node 
-monitoring.
+monitoring \cite{kreutz}.
 
 \subsubsection{Applications}
- Network \cite{norman} applications are the actual entites managing the network. Proposed 
+ Network applications are the actual entites managing the network. Proposed 
 layering up until now is solely aimed at providing right abstractions for 
 applications. Forwarding behaviour of the network is programmed in application 
 level against the virtual network topology provided by network operating system,
@@ -196,12 +227,12 @@ Network applications are developed and deployed for executing
 certain network functions such as, 
 enforcing security policies, routing, network virtualization, load balancing,
  power saving, providing reliability, measurement and monitoring,
- traffic engineering and optimization, etc.
+ traffic engineering and optimization, etc. \cite{kreutz}
 
 One of the most promising novelites provided by this capability in 
 networking is SDN app stores. HP hosts an app store similar to Apple or
  Google's stores for mobile devices. Store provides apps for OpenFlow
- based HP devices \cite{hede}.
+ based HP devices.
 \section{Conclusion}
 There is a tremendous research effort ongoing in the field of SDN. Research
  and development is focused on improving switch design for performance, 
